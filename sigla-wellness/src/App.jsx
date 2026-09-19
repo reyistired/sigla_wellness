@@ -76,7 +76,7 @@ export default function App() {
         <Reveal stagger={0.08}><Testimonials /></Reveal>
         <Reveal><InquiryForm prefill={prefill} /></Reveal>
       </main>
-      <Footer />
+      <Reveal><Footer /></Reveal>
     </>
   );
 }

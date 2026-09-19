@@ -38,7 +38,7 @@ export default function Reveal({ children, className = '', as: Tag = 'div', stag
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
 
-    const children = ref.current.querySelectorAll('.svc-card, .tier, .coach, .q, .promo-offer, .about-card');
+    const children = ref.current.querySelectorAll('.svc-card-tall, .svc-featured, .tier, .coach, .q, .promo-chip, .about-card');
     if (children.length === 0) return;
 
     gsap.fromTo(
