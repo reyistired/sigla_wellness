@@ -2,6 +2,7 @@
 export const SERVICES = [
   {
     name: 'Nutrition Consultation & Meal Plans',
+    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=80',
     icon: 'nutrition',
     desc: 'Practical, budget-friendly meal planning using local, affordable food.',
     gets: [
@@ -13,6 +14,7 @@ export const SERVICES = [
   },
   {
     name: 'Personal Fitness Coaching',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80',
     icon: 'fitness',
     desc: "One-on-one workout plans and guided sessions based on the client's goals.",
     gets: [
@@ -24,6 +26,7 @@ export const SERVICES = [
   },
   {
     name: 'Weight Management Program',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80',
     icon: 'weight',
     desc: 'An 8-12 week guided program combining exercise, meal planning, and progress tracking.',
     gets: [
@@ -35,6 +38,7 @@ export const SERVICES = [
   },
   {
     name: 'Wellness Membership Packages',
+    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80',
     icon: 'membership',
     desc: 'Monthly bundles combining classes, coaching, and consultations at a discount.',
     gets: [
@@ -47,6 +51,7 @@ export const SERVICES = [
   },
   {
     name: 'Stress & Mindfulness Workshops',
+    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&q=80',
     icon: 'mindful',
     desc: 'Guided breathing, sleep hygiene, and stress-management sessions.',
     gets: [

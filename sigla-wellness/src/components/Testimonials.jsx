@@ -1,22 +1,27 @@
-import { TESTIMONIALS } from '../data/people';
+export default function Testimonials({ testimonials }) {
+  const [featured, ...others] = testimonials;
 
-export default function Testimonials() {
   return (
-    <section className="sec" id="stories" aria-labelledby="storyTitle">
+    <section className="sec band-sand" id="stories" aria-labelledby="storyTitle">
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow">Testimonials</span>
-          <h2 id="storyTitle">What Our Clients Are Saying</h2>
+          <h2 id="storyTitle">What clients are saying</h2>
         </div>
         <div className="stories">
-          {TESTIMONIALS.map((t) => (
-            <figure className={`q${t.big ? ' big' : ''}`} key={t.who}>
-              <blockquote>{t.quote}</blockquote>
-              <figcaption>{t.who}<span>{t.role}</span></figcaption>
-            </figure>
-          ))}
+          <figure className="q big">
+            <blockquote>{featured.quote}</blockquote>
+            <figcaption>{featured.who}<span>{featured.role}</span></figcaption>
+          </figure>
+          <div className="q-side">
+            {others.map((t) => (
+              <figure className="q" key={t.who}>
+                <blockquote>{t.quote}</blockquote>
+                <figcaption>{t.who}<span>{t.role}</span></figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
-        <p className="caption">Real stories from Sigla Wellness members.</p>
+        <p className="caption">Sample testimonials for this project.</p>
       </div>
     </section>
   );

@@ -1,27 +1,27 @@
-import { COACHES } from '../data/people';
+function CoachCard({ initials, name, role, bio, tone }) {
+  return (
+    <article className="coach">
+      <div className={`avatar ${tone}`} aria-hidden="true">{initials}</div>
+      <h3>{name}</h3>
+      <p className="role">{role}</p>
+      <p className="bio">{bio}</p>
+    </article>
+  );
+}
 
-export default function Coaches() {
+export default function Coaches({ coaches }) {
   return (
     <section className="sec" id="coaches" aria-labelledby="coachTitle">
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow">Our Team</span>
           <h2 id="coachTitle">Meet the coaches</h2>
           <p>Every coach works with beginners and starts from where you are.</p>
         </div>
         <div className="coaches">
-          {COACHES.map((c) => (
-            <article className="coach" key={c.name}>
-              <div className={`avatar ${c.tone}`} aria-hidden="true">{c.initials}</div>
-              <div>
-                <h3>{c.name}</h3>
-                <p className="role">{c.role}</p>
-                <p>{c.bio}</p>
-              </div>
-            </article>
+          {coaches.map((c) => (
+            <CoachCard key={c.name} {...c} />
           ))}
         </div>
-        <p className="caption">Every coach works with beginners and starts from where you are.</p>
       </div>
     </section>
   );

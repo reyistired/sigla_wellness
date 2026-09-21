@@ -9,6 +9,7 @@ export default function InquiryForm({ prefill }) {
   const [values, setValues] = useState({ name: '', contact: '', service: 'Not sure yet', message: '' });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
+  const [filled, setFilled] = useState(false);
   const nameRef = useRef(null);
   const contactRef = useRef(null);
   const sentRef = useRef(null);
@@ -28,6 +29,7 @@ export default function InquiryForm({ prefill }) {
       message: prefill.message || v.message,
     }));
     setSent(false);
+    setFilled(true);
     requestAnimationFrame(() => nameRef.current?.focus({ preventScroll: true }));
   }, [prefill]);
 
@@ -52,6 +54,7 @@ export default function InquiryForm({ prefill }) {
     if (next.contact) return contactRef.current?.focus();
 
     // Frontend-only for now. To really send it, call EmailJS or Formspree here.
+    setFilled(false);
     setSent(true);
   }
 
@@ -59,24 +62,26 @@ export default function InquiryForm({ prefill }) {
     setValues({ name: '', contact: '', service: 'Not sure yet', message: '' });
     setErrors({});
     setSent(false);
+    setFilled(false);
     requestAnimationFrame(() => nameRef.current?.focus());
   }
 
   return (
-    <section className="sec band-mint" id="contact" aria-labelledby="contactTitle">
+    <section className="sec" id="contact" aria-labelledby="contactTitle">
       <div className="wrap contact">
-        <div className="sec-head">
-          <span className="eyebrow">Get in Touch</span>
+        <div className="contact-intro">
           <h2 id="contactTitle">Send an inquiry</h2>
           <p>Tell us what you'd like to try. We'll reply with next steps.</p>
           <ul className="details">
-            <li><strong>Location</strong>Brgy. Cabatuan, Cabanatuan City, Nueva Ecija 3100</li>
-            <li><strong>Hours</strong>Monday to Saturday, 6:00 AM – 8:00 PM. Closed on Sundays.</li>
-            <li><strong>Phone</strong>(044) 951-2087</li>
+            <li><strong>Location</strong><span>Brgy. Cabatuan, Cabanatuan City, Nueva Ecija 3100</span></li>
+            <li><strong>Hours</strong><span>Monday to Saturday, 6:00 AM – 8:00 PM. Closed on Sundays.</span></li>
+            <li><strong>Phone</strong><span><a href="tel:+63449512087">(044) 951-2087</a></span></li>
             <li>
               <strong>Follow us</strong>
-              <a href="https://facebook.com/siglawellness" target="_blank" rel="noopener noreferrer">Facebook</a> and{' '}
-              <a href="https://instagram.com/siglawellness" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <span>
+                <a href="https://facebook.com/siglawellness" target="_blank" rel="noopener noreferrer">Facebook</a> and{' '}
+                <a href="https://instagram.com/siglawellness" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </span>
             </li>
           </ul>
         </div>
@@ -93,6 +98,11 @@ export default function InquiryForm({ prefill }) {
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate>
+              {filled && (
+                <p className="form-note" role="status">
+                  We filled in the service and message for you. Edit anything you like.
+                </p>
+              )}
               <div className="field">
                 <label htmlFor="f-name">Full name</label>
                 <input
@@ -115,7 +125,7 @@ export default function InquiryForm({ prefill }) {
                   ref={contactRef}
                   type="text"
                   autoComplete="email"
-                  placeholder="e.g. juan@email.com or 09171234567"
+                  placeholder="juan@email.com"
                   value={values.contact}
                   onChange={set('contact')}
                   aria-invalid={errors.contact ? 'true' : undefined}

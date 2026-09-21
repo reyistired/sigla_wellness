@@ -1,21 +1,31 @@
-export default function About() {
+// Business Profile / Overview. Receives the business data as props from App.
+export default function About({ business }) {
+  const { name, overview, problem, nameMeaning, target } = business;
+  const facts = [
+    { label: 'Age group', value: target.ageGroup },
+    { label: 'Who we serve', value: target.groups },
+    { label: 'Where', value: target.market },
+  ];
+
   return (
     <section className="sec" id="about" aria-labelledby="aboutTitle">
       <div className="wrap">
         <div className="about-grid">
-          <div className="sec-head" style={{textAlign:'left',marginInline:'0'}}>
-            <span className="eyebrow">About Sigla Wellness</span>
-            <h2 id="aboutTitle">Rediscover Your Best Self</h2>
-            <p>
-              At Sigla Wellness, we believe that true vitality comes from a harmonious balance of mind, body, and spirit. Our sanctuary combines the tranquility of a wellness studio with expert-guided programs designed to cater to your every need.
-            </p>
-          </div>
-          <div className="about-card" style={{borderColor:'var(--wood-muted)',background:'linear-gradient(135deg,var(--surface) 0%,var(--wood-light) 100%)'}}>
-            <h4>Planning Your Visit?</h4>
-            <p>First-time guests are welcome. Book a free 15-minute discovery call to find the right starting point for you.</p>
-            <a className="btn btn-outline-teal" href="#contact">Book a call</a>
+          <h2 id="aboutTitle">What is {name}?</h2>
+          <div className="about-text">
+            <p className="lead">{overview}</p>
+            <p>{problem}</p>
+            <p>{nameMeaning}</p>
           </div>
         </div>
+        <dl className="facts">
+          {facts.map((fact) => (
+            <div key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

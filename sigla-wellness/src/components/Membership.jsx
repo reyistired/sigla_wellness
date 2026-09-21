@@ -1,4 +1,3 @@
-import { TIERS } from '../data/membership';
 import { Check } from './Icons';
 
 function PriceCard({ tier, onChoose }) {
@@ -12,24 +11,23 @@ function PriceCard({ tier, onChoose }) {
           <li key={f}><Check />{f}</li>
         ))}
       </ul>
-      <button className={`btn ${tier.featured ? 'btn-dark' : 'btn-light'}`} type="button" onClick={() => onChoose(tier.name)}>
+      <button className={`btn ${tier.featured ? 'btn-primary' : 'btn-light-outline'}`} type="button" onClick={() => onChoose(tier.name)}>
         Choose {tier.name}
       </button>
     </article>
   );
 }
 
-export default function Membership({ onAsk }) {
+export default function Membership({ tiers, onAsk }) {
   return (
     <section className="sec band-deep" id="membership" aria-labelledby="memTitle">
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow eyebrow-dark">Membership</span>
           <h2 id="memTitle">Membership packages</h2>
           <p>Monthly bundles of coaching, consultations, and workshops at a lower price than booking each one.</p>
         </div>
         <div className="tiers">
-          {TIERS.map((t) => (
+          {tiers.map((t) => (
             <PriceCard
               key={t.name}
               tier={t}

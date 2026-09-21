@@ -1,18 +1,17 @@
 # Sigla Wellness
 
-**Live well, every day.**
+**Sigla sa Bawat Araw.**
 
 A frontend-only React (Vite) website for the Sigla Wellness health and wellness business. Built with React 18, Vite, and GSAP animations.
 
-![Sigla Wellness](sigla-wellness/public/sigla_wellness_hero.png)
+![Sigla Wellness](sigla-wellness/public/sigla_wellness_hero.webp)
 
 ## Features
 
 - Responsive, mobile-first design
-- Smooth scroll animations with GSAP
-- Light/dark theme support
+- One hero entrance animation with GSAP
 - Inquiry form with service prefill
-- Sections: Hero, About, Services, Meal Plans, Membership, Coaches, Schedule, Testimonials, Contact
+- Sections: Hero with next sessions, About, Mission and Vision, Services, Meal Plans, Why Choose Us, Membership, Coaches, Schedule, Testimonials, Contact
 
 ## Tech Stack
 
@@ -59,6 +58,7 @@ sigla_wellness/
 │   │   ├── App.jsx                 # Root component & layout
 │   │   ├── index.css               # Design tokens & all styles
 │   │   ├── data/                   # Content data (edit here)
+│   │   │   ├── business.js         # Overview, mission, vision, objectives, features
 │   │   │   ├── services.js         # Service offerings
 │   │   │   ├── membership.js       # Pricing tiers
 │   │   │   ├── schedule.js         # Weekly schedule
@@ -67,8 +67,10 @@ sigla_wellness/
 │   │       ├── Navbar.jsx
 │   │       ├── Hero.jsx
 │   │       ├── About.jsx
+│   │       ├── MissionVision.jsx
 │   │       ├── Services.jsx
 │   │       ├── MealPlan.jsx
+│   │       ├── Features.jsx
 │   │       ├── Membership.jsx
 │   │       ├── Coaches.jsx
 │   │       ├── Schedule.jsx
@@ -93,21 +95,21 @@ Edit CSS variables at the top of `src/index.css`:
 
 ```css
 :root {
-  --green: #2a6a4a;
-  --orange: #e8743a;
-  --bg: #faf8f5;
-  --font-head: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --teal: #0e8a7d;
+  --mint: #e8f5f0;
+  --wood: #c4873b;
+  --deep: #0b3a36;
+  --font-head: 'Fraunces', serif;
+  --font-body: 'Jost', sans-serif;
 }
 ```
-
-Dark theme values are defined right below in a `@media (prefers-color-scheme: dark)` block.
 
 ### Content
 
 Update business data in `src/data/`:
 
-- `services.js` - Service descriptions and pricing
+- `business.js` - Overview, mission, vision, objectives, and features
+- `services.js` - Service descriptions
 - `membership.js` - Membership tiers and rates
 - `schedule.js` - Weekly class schedule
 - `people.js` - Coach profiles, testimonials, and meal plans

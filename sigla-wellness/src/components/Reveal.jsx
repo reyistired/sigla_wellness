@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
-export default function Reveal({ children, className = '', as: Tag = 'div', stagger, ...props }) {
+// Fades a section in once, the first time it scrolls into view.
+export default function Reveal({ children, className = '' }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -12,8 +9,8 @@ export default function Reveal({ children, className = '', as: Tag = 'div', stag
     const el = ref.current;
     if (!el) return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
       setVisible(true);
       return;
     }
@@ -22,46 +19,18 @@ export default function Reveal({ children, className = '', as: Tag = 'div', stag
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.unobserve(el);
+          observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.06 }
     );
-
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!visible || !ref.current) return;
-
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    const children = ref.current.querySelectorAll('.svc-card-tall, .svc-featured, .tier, .coach, .q, .promo-chip, .about-card');
-    if (children.length === 0) return;
-
-    gsap.fromTo(
-      children,
-      { y: 24, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: stagger || 0.1,
-        ease: 'power2.out',
-        clearProps: 'transform',
-      }
-    );
-  }, [visible, stagger]);
-
   return (
-    <Tag
-      ref={ref}
-      className={`reveal${visible ? ' visible' : ''} ${className}`}
-      {...props}
-    >
+    <div ref={ref} className={`reveal${visible ? ' visible' : ''} ${className}`.trim()}>
       {children}
-    </Tag>
+    </div>
   );
 }
