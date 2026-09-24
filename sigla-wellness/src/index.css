@@ -123,7 +123,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .menu-open .menu-line:first-child { transform: translateY(3.25px) rotate(45deg); }
 .menu-open .menu-line:last-child { transform: translateY(-3.25px) rotate(-45deg); }
 
-@media (max-width: 960px) {
+/* The full link set needs more room than an iPad in landscape provides. */
+@media (max-width: 1100px) {
   .nav .wrap { height: 72px; }
   .menu-btn { display: flex; }
   .btn-nav-cta { display: none; }
@@ -150,6 +151,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (max-width: 900px) {
   .hero { min-height: 640px; }
   .hero-bg img { object-position: 42% 60%; }
+}
+
+/* A hero should retain its sense of arrival on compact screens, even when the
+   browser's address bar changes the visual viewport height. */
+@media (max-width: 600px) {
+  .hero { min-height: 44rem; min-height: max(44rem, 100svh); min-height: max(44rem, 100dvh); }
+  .hero-copy { padding: 6.75rem 0 5.5rem; }
+  .hero-bg img { object-position: 46% 58%; }
 }
 
 /* About */

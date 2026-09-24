@@ -45,7 +45,8 @@ export default function Navbar() {
     if (!open) return () => { document.body.style.overflow = ''; };
 
     const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
-    const onResize = () => { if (window.innerWidth > 960) setOpen(false); };
+    // Keep this aligned with the compact-navigation breakpoint in index.css.
+    const onResize = () => { if (window.innerWidth > 1100) setOpen(false); };
     window.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
     return () => {
